@@ -10,8 +10,8 @@ int main()
 
     float x = 400.0f;
     float y = 400.0f;
-    float a = 10.0f;    // amplitude (radius of movement)
-    float b = 4.0f;     // frequency (rate of movement)
+    float a = 10.0f;    // frequency (rate of movement)
+    float b = 4.0f;    // amplitude (radius of movement)
 
     Vector2 pos = { 100.0f, 400.0f };
 
@@ -25,6 +25,10 @@ int main()
 
         // Simple animation
         pos += Vector2UnitX * 100.0f * dt;
+
+        //Animate x and y based on a and b floats
+        y = y + (cos(t * a)) * a * b * dt;
+        x = x + (-sin(t * a)) * a * b * dt;
 
         BeginDrawing();
             ClearBackground(WHITE);
@@ -48,9 +52,7 @@ int main()
             DrawText(text, 650, 5, 20, BLUE);
             
             DrawCircle(x, y, 25.0f, PURPLE);
-            //Animate x and y based on a and b floats
-            y = y + (cos(t * a)) * a * b * dt;
-            x = x + (-sin(t * a)) * a * b * dt;
+
         EndDrawing();
     }
 
