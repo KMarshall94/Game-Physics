@@ -43,14 +43,14 @@ int main()
             // Use TextFormat to convert data (like int or float) to const char* (text)!
             // TextFormat follows C-style formatting: https://cplusplus.com/reference/cstdio/printf/
 
-            const char* text = TextFormat("Time: %f", t);
+            const char* text = TextFormat("Time: %.2f", t);
             //TODO -- make time 2 decimals
             DrawText(text, 650, 5, 20, BLUE);
             
-
-            // TODO -- animate this based on equation in lab document week 1!
             DrawCircle(x, y, 25.0f, PURPLE);
-
+            //Animate x and y based on a and b floats
+            y = y + (cos(t * a)) * a * b * dt;
+            x = x + (-sin(t * a)) * a * b * dt;
         EndDrawing();
     }
 
