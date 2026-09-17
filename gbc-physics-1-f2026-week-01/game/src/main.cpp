@@ -2,36 +2,38 @@
 #include "raymath.h"
 #include "raygui.h"
 #include "cstdio"
+
 int main()
 {
     InitWindow(800, 800, "Physics-1");
     InitAudioDevice();
     SetTargetFPS(60);
-    /*Set Vector2 for launch position
-      Set Floats for Launch angle and speed*/
 
-    /*
-    Need to negate launch angle so it points upwards, Raylib is RHS
-    */
+    Vector2 launch_position = { 100.0f, 700.0f };
+    float launch_angle = 0.0f;
+    float launch_speed = 100.0f;
+
     while (!WindowShouldClose())
     {
-        // 1. Calculate launch_direction Vector2 by using the Vector2Rotate function.
-       // (Be sure to convert launch_angle from degrees to radians when passing it to Vector2Rotate)!
-       // 2. Calculate launch_velocity Vector2 by multiplying launch_direction by launch_speed
-       // 3. Render launch_velocity as a line from launch_position to launch_position + launch_velocity
+        Vector2 launch_direction = Vector2Rotate(Vector2UnitX, -launch_angle * DEG2RAD);
+
+        Vector2 launch_velocity = launch_direction * launch_speed;
 
         BeginDrawing();
-            ClearBackground(WHITE);
 
-            // Draw your launch_position + launch_velocity line here!
+        ClearBackground(WHITE);
 
-            DrawCircleV(GetMousePosition(), 20.0f, RED);
+        DrawCircleV(launch_position, 20.0f, GRAY);
 
+        DrawLineEx(launch_position, launch_position + launch_velocity, 4.0f, ORANGE);
+
+        DrawCircleV(GetMousePosition(), 20.0f, RED);
 
         EndDrawing();
     }
 
     CloseAudioDevice();
     CloseWindow();
+
     return 0;
 }
